@@ -1,0 +1,36 @@
+{
+  "name": "currencyconverter",
+  "version": "1.0.0",
+  "description": "A clean, semi-transparent currency converter for Windows",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "dist": "electron-builder --publish=never"
+  },
+  "keywords": ["currency", "converter", "electron", "desktop"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "build": {
+    "appId": "com.example.currencyconverter",
+    "productName": "Currency Converter",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/**/*",
+      "node_modules/electron/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    }
+  },
+  "devDependencies": {
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.12"
+  }
+}
