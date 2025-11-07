@@ -2,7 +2,7 @@
 
 
 
-A simple, clean currency converter desktop app (Codename: Goose).  
+A simple, clean currency converter desktop app (Codename: Goose).
 
 Built using HTML, CSS, JavaScript, and Electron.
 
@@ -22,7 +22,7 @@ Built using HTML, CSS, JavaScript, and Electron.
 
 \## 🧠 How It Works
 
-This project uses Electron to create a desktop application using web technologies.  
+This project uses Electron to create a desktop application using web technologies.
 
 All UI and functionality runs inside a browser-like environment bundled as an app.
 
@@ -55,6 +55,4 @@ Just a vibe. 🪿✨
 \## 📜 License
 
 This project is for personal / educational use unless you specify otherwise.
-
-
 
