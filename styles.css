@@ -476,3 +476,83 @@ body {
     text-shadow: 0 0 3px rgba(0, 255, 65, 0.3) !important;
     font-family: 'Courier New', monospace !important;
 }
+
+/* PWA Mobile Responsive Design */
+@media screen and (max-width: 480px) {
+    body {
+        margin: 0;
+        border-radius: 0;
+        min-height: 100vh;
+    }
+    
+    .container {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+        padding: 10px;
+        box-sizing: border-box;
+        overflow-y: auto;
+    }
+    
+    .window-controls {
+        display: none; /* Hide desktop window controls on mobile */
+    }
+    
+    .header h1 {
+        font-size: 20px;
+        margin: 10px 0 5px 0;
+    }
+    
+    .header .subtitle {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+    
+    .input-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    #amount-input, #currency-select {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px; /* Prevent zoom on iOS */
+        border-radius: 8px;
+    }
+    
+    .currency-item {
+        padding: 12px;
+        margin: 8px 0;
+        padding-right: 50px; /* Space for star button */
+    }
+    
+    .currency-code {
+        font-size: 14px;
+        font-weight: 600;
+    }
+    
+    .currency-value {
+        font-size: 16px;
+        font-weight: 500;
+    }
+    
+    .star-btn {
+        right: 12px;
+        font-size: 18px;
+        padding: 8px;
+        width: 32px;
+        height: 32px;
+    }
+    
+    .signature {
+        font-size: 9px;
+        margin-top: 15px;
+        opacity: 0.5;
+    }
+    
+    .results-section {
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}

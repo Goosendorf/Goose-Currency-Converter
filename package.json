@@ -9,7 +9,12 @@
     "build": "electron-builder",
     "dist": "electron-builder --publish=never"
   },
-  "keywords": ["currency", "converter", "electron", "desktop"],
+  "keywords": [
+    "currency",
+    "converter",
+    "electron",
+    "desktop"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
@@ -31,6 +36,7 @@
   },
   "devDependencies": {
     "electron": "^39.0.0",
-    "electron-builder": "^26.0.12"
+    "electron-builder": "^26.0.12",
+    "electron-packager": "^17.1.2"
   }
 }

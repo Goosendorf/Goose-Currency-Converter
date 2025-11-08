@@ -110,5 +110,19 @@
     <script src="favorites.js"></script>
     <script src="click_to_copy.js"></script>
     <script src="theme_toggle.js"></script>
+    <script>
+        // Register Service Worker for PWA
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function() {
+                navigator.serviceWorker.register("service-worker.js")
+                    .then(function(registration) {
+                        console.log("Currency Converter PWA: Service Worker registered");
+                    })
+                    .catch(function(error) {
+                        console.log("Currency Converter PWA: Service Worker registration failed");
+                    });
+            });
+        }
+    </script>
 </body>
 </html>
