@@ -13,8 +13,8 @@ let exchangeRates = {
     INR: 83.5,
     AED: 3.67,
     ZAR: 18.75, // 1 USD = 18.75 ZAR
-    BTC: 0.0000135, // 1 USD = 0.0000135 BTC (assuming ~$74,000 per BTC)
-    SAT: 1350 // 1 USD = 1,350 Satoshis (100M sats per BTC)
+    BTC: 0.0000098, // 1 USD = 0.0000098 BTC (assuming ~$102,000 per BTC)
+    SAT: 980 // 1 USD = 980 Satoshis (100M sats per BTC)
 };
 
 let lastUpdated = null;
@@ -39,7 +39,7 @@ if (pinBtn) pinBtn.style.display = 'none';
 if (closeBtn) closeBtn.style.display = 'none';
 
 // API endpoints for fetching exchange rates
-const APIs = [
+const API_ENDPOINTS = [
     {
         name: 'ExchangeRate-API',
         url: 'https://api.exchangerate-api.com/v4/latest/USD',
@@ -56,10 +56,18 @@ const APIs = [
             CNY: data.rates.CNY,
             INR: data.rates.INR
         })
+    },
+    {
+        name: 'CoinGecko',
+        url: 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd',
+        parseResponse: (data) => ({
+            BTC: 1 / data.bitcoin.usd, // 1 USD = (1/bitcoin_price) BTC
+            SAT: 100000000 / data.bitcoin.usd // 1 USD = (100M/bitcoin_price) SAT
+        })
     }
 ];
 
-// Fetch exchange rates from APIs
+// Fetch exchange rates from multiple APIs
 async function fetchExchangeRates() {
     if (isUpdatingRates) return;
     isUpdatingRates = true;
@@ -67,20 +75,31 @@ async function fetchExchangeRates() {
     hideError();
 
     try {
-        const response = await fetch(APIs[0].url);
-        if (!response.ok) throw new Error('Failed to fetch rates');
+        // Fetch from all API endpoints
+        const promises = API_ENDPOINTS.map(async (api) => {
+            try {
+                const response = await fetch(api.url);
+                if (!response.ok) throw new Error(`${api.name} API failed`);
+                const data = await response.json();
+                return api.parseResponse(data);
+            } catch (error) {
+                console.warn(`Failed to fetch from ${api.name}:`, error);
+                return {};
+            }
+        });
+
+        const results = await Promise.all(promises);
         
-        const data = await response.json();
-        const rates = APIs[0].parseResponse(data);
-        
-        // Update exchange rates
-        Object.assign(exchangeRates, rates);
+        // Merge all results into exchangeRates
+        results.forEach(rates => {
+            Object.assign(exchangeRates, rates);
+        });
         
         lastUpdated = new Date();
         updateLastUpdatedDisplay();
         updateConversions();
         
-        console.log('Exchange rates updated successfully');
+        console.log('Exchange rates updated successfully', exchangeRates);
     } catch (error) {
         console.warn('Failed to fetch exchange rates:', error);
         showError('Failed to update exchange rates. Using cached values.');
