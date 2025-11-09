@@ -13,8 +13,8 @@ let exchangeRates = {
     INR: 83.5,
     AED: 3.67,
     ZAR: 18.75, // 1 USD = 18.75 ZAR
-    BTC: 0.0000105, // 1 USD = 0.0000105 BTC (assuming ~$95,000 per BTC)
-    SAT: 1050 // 1 USD = 1,050 Satoshis (100M sats per BTC)
+    BTC: 0.0000135, // 1 USD = 0.0000135 BTC (assuming ~$74,000 per BTC)
+    SAT: 1350 // 1 USD = 1,350 Satoshis (100M sats per BTC)
 };
 
 let lastUpdated = null;

@@ -21,23 +21,12 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('currencyConverterTheme', theme);
     }
     
-    function createThemeButton() {
-        const windowControls = document.querySelector('.window-controls');
-        if (!windowControls) return;
+    function setupThemeButton() {
+        const themeBtn = document.getElementById('theme-toggle');
+        if (!themeBtn) return;
         
-        const themeBtn = document.createElement('button');
-        themeBtn.id = 'theme-btn';
-        themeBtn.className = 'theme-btn';
         themeBtn.title = `Theme: ${themes[currentTheme].name}`;
         themeBtn.innerHTML = themes[currentTheme].icon;
-        
-        const closeBtn = document.getElementById('close-btn');
-        if (closeBtn) {
-            windowControls.insertBefore(themeBtn, closeBtn);
-        } else {
-            windowControls.appendChild(themeBtn);
-        }
-        
         themeBtn.addEventListener('click', cycleTheme);
         return themeBtn;
     }
@@ -51,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         applyTheme(currentTheme);
         saveTheme(currentTheme);
         
-        const themeBtn = document.getElementById('theme-btn');
+        const themeBtn = document.getElementById('theme-toggle');
         if (themeBtn) {
             themeBtn.innerHTML = themes[currentTheme].icon;
             themeBtn.title = `Theme: ${themes[currentTheme].name}`;
@@ -66,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function initializeThemes() {
         loadTheme();
-        createThemeButton();
+        setupThemeButton();
     }
     
     setTimeout(initializeThemes, 100);
